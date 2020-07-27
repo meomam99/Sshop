@@ -13,10 +13,7 @@ class Current {
     
     init() {
        
-    }
-    
+    }    
     var CurrentProduct: Product = Product(name: "", description: "", options: [], images: [], variants: [])
-    
-    var currentKeyWord: String = ""
     
 }

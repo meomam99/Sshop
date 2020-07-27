@@ -41,11 +41,6 @@ struct Order: Codable {
     var price: Int
 }
 
-struct ResultSearch: Codable {
-    var product: Product
-}
-
-
 struct ProductToAdd: Codable {
     var product: ProductField
 }
@@ -54,3 +49,33 @@ struct ProductField: Codable {
     var name: String
 }
 
+extension Product {
+    func getPriceInString(mode: Int) -> String {
+        var price = 0
+        if mode == 1 {
+            price = Int(self.variants[0].variant_retail_price)
+        } else {
+            price = Int(self.variants[0].variant_whole_price)
+        }
+        var p: String = ""
+        for i in 0..<"\(price)".count  {
+               
+            if(i != 0 && i%3 == 0) {
+                p.append(".")
+            }
+            
+             p.append("\(price)".reversed()[i])
+        }
+        let rs: String = (String) (p.reversed())
+        return " \(rs) đ "
+    }
+    
+    func getDescription() -> String {
+        if let desc = self.description {
+            return desc
+        } else {
+            return "Chưa có mô tả cho sản phẩm này !"
+        }
+    }
+    
+}

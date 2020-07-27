@@ -21,21 +21,17 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        lbName.text = "\(Current.shared.CurrentProduct.name)"
-        lbPrice.text = Contants.shared.showPrice(price: (Int) (p.variants[0].variant_retail_price))
-        lbPrice2.text = Contants.shared.showPrice(price: (Int) (p.variants[0].variant_whole_price))
-       
-        
-        if p.description != nil {
-        lbDesc.text = "\(p.description!)"
-        } else {
-          lbDesc.text = "Chưa có mô tả cho sản phẩm này !"
-        }
-        
+        setupNode()
+    }
+    
+    func setupNode() {
+        lbName.text = p.name
+        lbPrice.text = p.getPriceInString(mode: 1)
+        lbPrice2.text = p.getPriceInString(mode: 2)
+        lbDesc.text = p.getDescription()
         if(p.images.count != 0) {
-            let url = URL(string: p.images[0].full_path)!
-            Contants.shared.setImageFromInternet(img: imgMain, url: url)
-        } 
+            self.imgMain.setImageFromInternet(urlString: p.images[0].full_path)
+        }
     }
     
     func setupView() {

@@ -14,7 +14,7 @@ class BuyViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     var quantity: Int = 1
     var price: Int = 0
     var options = [Option(name: "", values: [])]
-
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -29,7 +29,7 @@ class BuyViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-       
+        
         if(pickerView == self.pvOption1) {
             return options[0].values[row]
         } else {
@@ -37,7 +37,7 @@ class BuyViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         }
     }
     
-
+    
     @IBOutlet weak var pvOption2: UIPickerView!
     @IBOutlet weak var lbOption2: UILabel!
     @IBOutlet weak var pvOption1: UIPickerView!
@@ -56,9 +56,9 @@ class BuyViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         setupNode()
         setupPrice()
         showQuantity()
-       
+        
     }
-
+    
     func setPickerView() {
         pvOption1.dataSource = self
         pvOption1.delegate = self
@@ -73,9 +73,13 @@ class BuyViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     func showQuantity() {
         lbQuantity.text = " \(quantity) "
-        lbPrice.text = Contants.shared.showPrice(price: price)
+        if(quantity < 5) {
+            lbPrice.text = p.getPriceInString(mode: 1)
+        } else {
+            lbPrice.text = p.getPriceInString(mode: 2)
+        }
     }
-
+    
     func setupPrice() {
         if(quantity < 5) {
             price = (Int) (p.variants[0].variant_retail_price)
@@ -87,22 +91,21 @@ class BuyViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBAction func btnOKTapped(_ sender: Any) {
         
         Cart.shared.add(p: p, quantity: quantity, price: price)
-    
+        
         let alert: UIAlertController = UIAlertController(title: "Xin cảm ơn", message: "Đã thêm \(p.name) vào giỏ hàng !", preferredStyle: .alert)
         let btnOK:UIAlertAction = UIAlertAction(title: "OK", style: .default) { (btn) in
-               }
+        }
         
         alert.addAction(btnOK)
-            present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     func setupNode() {
-        lbName.text = "\(Current.shared.CurrentProduct.name)"
+        lbName.text = p.name
         if(p.images.count != 0) {
-            let url = URL(string: p.images[0].full_path)!
-            Contants.shared.setImageFromInternet(img: img, url: url)
+            self.img.setImageFromInternet(urlString: p.images[0].full_path)
         }
-       
+        
         btnOK.layer.cornerRadius = 10
         stpQuantity.wraps = true
         stpQuantity.autorepeat = true

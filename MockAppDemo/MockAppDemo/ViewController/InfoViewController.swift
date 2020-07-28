@@ -37,9 +37,11 @@ class InfoViewController: UIViewController {
     func setupView() {
         lbName.numberOfLines = 2
         lbPrice.layer.borderWidth = 1
+        lbPrice.layer.cornerRadius = 3
         lbPrice.layer.borderColor = CGColor(srgbRed: 237/255, green: 157/255, blue: 38/255, alpha: 1)
         
         lbPrice2.layer.borderWidth = 1
+        lbPrice2.layer.cornerRadius = 3
         lbPrice2.layer.borderColor = CGColor(srgbRed: 219/255, green: 179/255, blue: 35/255, alpha: 1)
         
         lbDesc.numberOfLines = 10

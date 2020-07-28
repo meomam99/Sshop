@@ -13,13 +13,15 @@ class ProductViewController: UIViewController, UITableViewDataSource, UITableVie
     var products: [Product] = []
     var loadingData = true
     var total = 21
+    var page = 1
     let limit = 10
     
     @IBOutlet weak var btnAdd: UIButton!
     @IBOutlet weak var productTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAllProducts(page: 1, limit: limit)
+        setupView()
+        getAllProducts(page: page, limit: limit)
   
     }
     
@@ -36,19 +38,22 @@ class ProductViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (indexPath.row == products.count-1 && products.count%limit == 0 && products.count < total && loadingData == false) {
+        if (indexPath.row == products.count-1 && products.count < total && loadingData == false) {
+            loadingData = true
             self.perform(#selector(loadMore), with: nil, afterDelay: 1)
         }
     }
     
     @objc func loadMore() {
-        let page = products.count/limit + 1
         getAllProducts(page: page, limit: limit)
+    }
+    
+    func setupView() {
+        btnAdd.layer.cornerRadius = 10
     }
     
     func updateView() {
         loadingData = false
-        btnAdd.layer.cornerRadius = 10
         productTableView.delegate = self
         productTableView.dataSource = self
         productTableView.reloadData()
@@ -56,7 +61,7 @@ class ProductViewController: UIViewController, UITableViewDataSource, UITableVie
        
     
     func getAllProducts(page: Int, limit: Int) {
-        
+        loadingData = true
         let session = URLSession(configuration: .default)
         let source = "https://interndev.mysapo.vn/admin/products.json?page=\(page)&limit=\(limit)"
         guard let url = URL(string: source) else {
@@ -67,7 +72,6 @@ class ProductViewController: UIViewController, UITableViewDataSource, UITableVie
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue( "919b6923dae8421cfda6dffdc5a669f7", forHTTPHeaderField:"X-Sapo-SessionId")
-        loadingData = true
         let task = session.dataTask(with: request) { (data, response, error) in
             
             DispatchQueue.main.async {
@@ -87,6 +91,7 @@ class ProductViewController: UIViewController, UITableViewDataSource, UITableVie
                         self.total = rs.metadata.total
                         if(rs.products.count != 0) {
                             self.products.append(contentsOf: rs.products)
+                            self.page += 1
                         }
                         self.updateView()
                     } else {

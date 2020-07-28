@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     var products: [Product] = []
+    var page = 1
     let limit = 5
     var loadingData: Bool = true
     @IBOutlet weak var btnViewProduct: UIButton!
@@ -32,20 +33,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
-        if (indexPath.row == products.count-1 && products.count%limit == 0 && products.count <= 15 && loadingData == false) {
+        if (indexPath.row == products.count-1 && products.count%limit == 0 && loadingData == false) {
+            loadingData = true
             self.perform(#selector(loadMore), with: nil, afterDelay: 1)
         }
     }
     
     @objc func loadMore() {
-        let page = products.count/limit + 1
-        getNewProducts(page: page, limit: limit)
+        if page < 5 {
+            getNewProducts(page: page, limit: limit)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        getNewProducts(page: 1, limit: limit)
+        getNewProducts(page: page, limit: limit)
 
         
     }
@@ -56,7 +59,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBAction func update(_ sender: Any) {
         products = []
-        getNewProducts(page: 1, limit: limit)
+        page = 1
+        getNewProducts(page: page, limit: limit)
     }
     
     func setupView() {
@@ -86,7 +90,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func getNewProducts(page: Int, limit: Int) {
-        
+        loadingData = true
         let session = URLSession(configuration: .default)
         let source = "https://interndev.mysapo.vn/admin/products.json?page=\(page)&limit=\(limit)"
         guard let url = URL(string: source) else {
@@ -97,9 +101,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue( "919b6923dae8421cfda6dffdc5a669f7", forHTTPHeaderField:"X-Sapo-SessionId")
-        loadingData = true
+        
         let task = session.dataTask(with: request) { (data, response, error) in
-            
             DispatchQueue.main.async {
                 if let error = error {
                     print(error.localizedDescription)
@@ -116,6 +119,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         let rs: Result = try JSONDecoder().decode(Result.self, from: data)
                         if(rs.products.count != 0) {
                             self.products.append(contentsOf: rs.products)
+                            self.page += 1
                         }
                         self.updateView()
                     } else {
@@ -152,6 +156,7 @@ class ProductCell: UITableViewCell {
         } else {
             img.image = UIImage(named: "iconProduct")
         }
+        
         lbName.numberOfLines = 2
         lbPrice.layer.borderWidth = 1
         lbPrice.layer.borderColor = CGColor(srgbRed: 237/255, green: 157/255, blue: 38/255, alpha: 1)

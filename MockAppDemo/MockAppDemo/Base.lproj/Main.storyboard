@@ -200,10 +200,10 @@
                                 </constraints>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" canCancelContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qeZ-Rd-jPa" propertyAccessControl="none">
-                                <rect key="frame" x="30" y="298" width="354" height="464"/>
+                                <rect key="frame" x="30" y="298" width="354" height="484"/>
                                 <subviews>
                                     <view autoresizesSubviews="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdZ-Y5-RfH">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="464"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="484"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bánh Sampa (Champagne) Hoàng Mỹ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVE-GN-cSF">
                                                 <rect key="frame" x="0.0" y="5" width="354" height="21.5"/>
@@ -276,7 +276,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ng3-4v-B1I">
-                                <rect key="frame" x="100" y="772" width="214" height="60"/>
+                                <rect key="frame" x="100" y="792" width="214" height="60"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="uAo-ZJ-eZB"/>
@@ -300,7 +300,7 @@
                             <constraint firstItem="dzV-0t-Wvd" firstAttribute="trailing" secondItem="Ng3-4v-B1I" secondAttribute="trailing" constant="100" id="Jsc-iE-ZXZ"/>
                             <constraint firstItem="Ng3-4v-B1I" firstAttribute="top" secondItem="qeZ-Rd-jPa" secondAttribute="bottom" constant="10" id="KIl-wZ-HWA"/>
                             <constraint firstItem="Ng3-4v-B1I" firstAttribute="leading" secondItem="dzV-0t-Wvd" secondAttribute="leading" constant="100" id="Q1O-Gw-a9M"/>
-                            <constraint firstItem="dzV-0t-Wvd" firstAttribute="bottom" secondItem="Ng3-4v-B1I" secondAttribute="bottom" constant="30" id="QuH-3S-Dlj"/>
+                            <constraint firstItem="dzV-0t-Wvd" firstAttribute="bottom" secondItem="Ng3-4v-B1I" secondAttribute="bottom" constant="10" id="QuH-3S-Dlj"/>
                             <constraint firstItem="0Zf-it-A4A" firstAttribute="leading" secondItem="dzV-0t-Wvd" secondAttribute="leading" constant="20" id="Zk4-Lw-2z6"/>
                             <constraint firstItem="qeZ-Rd-jPa" firstAttribute="top" secondItem="0Zf-it-A4A" secondAttribute="bottom" constant="10" id="g16-w6-bCE"/>
                             <constraint firstItem="dzV-0t-Wvd" firstAttribute="trailing" secondItem="qeZ-Rd-jPa" secondAttribute="trailing" constant="30" id="gb5-ui-TqR"/>
@@ -446,13 +446,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUM-Ca-5lb">
-                                <rect key="frame" x="107" y="738" width="200" height="50"/>
+                                <rect key="frame" x="107" y="748" width="200" height="50"/>
                                 <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="0rm-TA-oS0"/>
                                     <constraint firstAttribute="height" constant="50" id="Yg6-r4-hlY"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Thêm">
                                     <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </state>
@@ -476,7 +476,7 @@
                             <constraint firstItem="HgU-0X-xtE" firstAttribute="centerY" secondItem="UuK-uA-RkD" secondAttribute="centerY" id="Oat-EN-X90"/>
                             <constraint firstItem="HgU-0X-xtE" firstAttribute="leading" secondItem="sMb-Hj-uzI" secondAttribute="leading" constant="50" id="SGh-A1-502"/>
                             <constraint firstItem="HgU-0X-xtE" firstAttribute="centerX" secondItem="UuK-uA-RkD" secondAttribute="centerX" id="Uly-G1-Pov"/>
-                            <constraint firstItem="sMb-Hj-uzI" firstAttribute="bottom" secondItem="eUM-Ca-5lb" secondAttribute="bottom" constant="20" id="vxT-h4-fQY"/>
+                            <constraint firstItem="sMb-Hj-uzI" firstAttribute="bottom" secondItem="eUM-Ca-5lb" secondAttribute="bottom" constant="10" id="vxT-h4-fQY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sMb-Hj-uzI"/>
                     </view>
@@ -633,7 +633,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Zz5-xg-vri"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="26"/>
                                         <state key="normal" title="OK">
                                             <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         </state>
@@ -695,7 +695,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iFV-up-Te3"/>
+        <segue reference="TS9-vk-LJe"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bgSapo" width="310" height="163"/>

@@ -9,7 +9,12 @@
 import Foundation
 
 struct Result: Codable {
+    var metadata: Metadata
     var products: [Product]
+}
+
+struct Metadata: Codable {
+    var total: Int
 }
 
 struct Product: Codable {

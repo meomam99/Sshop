@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     var products: [Product] = []
-    var page = 1
+    let limit = 5
     var loadingData: Bool = true
     @IBOutlet weak var btnViewProduct: UIButton!
     @IBOutlet weak var btnViewCart: UIButton!
@@ -31,17 +31,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if (indexPath.row == products.count-1 && products.count%6 == 0 && loadingData == false) {
-          
-            let page = products.count/6 + 1
-            getNewProducts(page: page, limit: 6)
+
+        if (indexPath.row == products.count-1 && products.count%limit == 0 && products.count <= 15 && loadingData == false) {
+            self.perform(#selector(loadMore), with: nil, afterDelay: 1)
         }
+    }
+    
+    @objc func loadMore() {
+        let page = products.count/limit + 1
+        getNewProducts(page: page, limit: limit)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        getNewProducts(page: 1, limit: 6)
+        getNewProducts(page: 1, limit: limit)
 
         
     }
@@ -52,7 +56,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBAction func update(_ sender: Any) {
         products = []
-        getNewProducts(page: 1, limit: 6)
+        getNewProducts(page: 1, limit: limit)
     }
     
     func setupView() {
